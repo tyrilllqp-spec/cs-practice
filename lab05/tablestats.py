@@ -41,3 +41,10 @@ def total_minutes(rows: list[dict], kind: str) -> float:
                 continue
             total = total + minutes
     return round(total, 1)
+
+
+def to_csv(counts: dict) -> str:
+    text = 'тип,количество\n'
+    for kind in sorted(counts):
+        text = text + kind + ',' + str(counts[kind]) + '\n'
+    return text
