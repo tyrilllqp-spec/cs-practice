@@ -17,3 +17,19 @@ def average(scores: list[float]) -> float:
     for score in scores:
         total = total + score
     return round(total / len(scores), 2)
+
+
+def ranking(names: list[str], scores: list[float]) -> list[str]:
+    assert len(names) == len(scores)
+    result = names.copy()
+    points = scores.copy()
+    for i in range(len(points) - 1):
+        for j in range(len(points) - 1 - i):
+            if points[j] < points[j + 1]:
+                score = points[j]
+                points[j] = points[j + 1]
+                points[j + 1] = score
+                name = result[j]
+                result[j] = result[j + 1]
+                result[j + 1] = name
+    return result
