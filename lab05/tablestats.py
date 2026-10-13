@@ -17,3 +17,27 @@ def read_rows(lines: list[str]) -> list[dict]:
                 row[header[i]] = fields[i]
             rows.append(row)
     return rows
+
+
+def count_types(rows: list[dict]) -> dict:
+    counts = {}
+    for row in rows:
+        kind = row['тип']
+        if kind in counts:
+            counts[kind] = counts[kind] + 1
+        else:
+            counts[kind] = 1
+    return counts
+
+
+def total_minutes(rows: list[dict], kind: str) -> float:
+    total = 0.0
+    for row in rows:
+        if row['тип'] == kind:
+            text = row['минуты'].replace(',', '.')
+            try:
+                minutes = float(text)
+            except ValueError:
+                continue
+            total = total + minutes
+    return round(total, 1)
