@@ -48,3 +48,43 @@ def to_csv(counts: dict) -> str:
     for kind in sorted(counts):
         text = text + kind + ',' + str(counts[kind]) + '\n'
     return text
+
+
+# >>> rows = read_rows([])
+# >>> print(rows)
+# []
+# >>> print(count_types(rows))
+# {}
+# >>> print(total_minutes(rows, 'ошибка'))
+# 0.0
+
+# >>> rows = read_rows(['дата,тип,минуты', '2026-03-01,запуск,1.5', '2026-03-01,ошибка,0.4'])
+# >>> print(count_types(rows))
+# {'запуск': 1, 'ошибка': 1}
+# >>> print(total_minutes(rows, 'ошибка'))
+# 0.4
+
+# >>> rows = read_rows(['дата,тип,минуты', 'битая строка', '2026-03-01,ошибка,1', 'лишние,поля,в,строке'])
+# >>> print(len(rows))
+# 1
+# >>> print(total_minutes(rows, 'ошибка'))
+# 1.0
+
+# >>> rows = read_rows([' ', ' дата , тип , минуты ', '', ' 2026-03-01 , ошибка , 2.5 '])
+# >>> print(rows)
+# [{'дата': '2026-03-01', 'тип': 'ошибка', 'минуты': '2.5'}]
+# >>> print(total_minutes(rows, 'ошибка'))
+# 2.5
+
+# >>> rows = [{'тип': 'ошибка', 'минуты': '1,5'}, {'тип': 'ошибка', 'минуты': 'нет'}, {'тип': 'ошибка', 'минуты': '0.5'}]
+# >>> print(total_minutes(rows, 'ошибка'))
+# 2.0
+# >>> print(total_minutes(rows, 'запуск'))
+# 0.0
+
+# >>> print(to_csv({'проверка': 4, 'ошибка': 4, 'запуск': 4, 'выгрузка': 2}), end='')
+# тип,количество
+# выгрузка,2
+# запуск,4
+# ошибка,4
+# проверка,4
