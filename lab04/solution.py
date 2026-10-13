@@ -33,3 +33,13 @@ def ranking(names: list[str], scores: list[float]) -> list[str]:
                 result[j] = result[j + 1]
                 result[j + 1] = name
     return result
+
+
+def above_average(names: list[str], scores: list[float]) -> list[str]:
+    assert len(names) == len(scores)
+    mean = average(scores)
+    result = []
+    for i in range(len(scores)):
+        if scores[i] > mean:
+            result.append(names[i])
+    return result
